@@ -15,7 +15,7 @@ console.log(countries)
                 return (
                     <div key={country.alpha3Code} className='country'>
                         <h3>
-                            <Link to={`/countries/${country.alpha3Code}}`}>
+                            <Link to={`/countries/${country.alpha3Code}`}>
                                 <img src={`https://flagpedia.net/data/flags/icon/72x54/${country.alpha2Code.toLowerCase()}.png`} alt='FLAAAG' />
                                 {country.name.common} 
                                

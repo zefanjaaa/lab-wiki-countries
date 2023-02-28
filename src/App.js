@@ -3,7 +3,9 @@ import './App.css';
 
 import NavBar from './components/NavBar';
 import CountriesList from './components/CountriesList';
-import {Routes, Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom';
+import CountryDetails from './components/CountryDetails';
+import ErrorPage from './components/ErrorPage';
 
 function App() {
 
@@ -16,7 +18,11 @@ function App() {
       {/* <CountriesList />
       <CountriesList countries={countriesData} /> */}
       <Routes>
-        <Route path='/' element={<CountriesList countries={countriesData}/>} />
+        <Route path='/' element={<CountriesList countries={countriesData} />} />
+        <Route path= '/countries/:countryId' element={<CountryDetails country={countriesData} />} /> 
+        {/* <Route path={`/countries/${countryId}`} element={<CountryDetails countries={countriesData} />} />  */}
+        {/* `/customers/${this.props.item.Id}` */}
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
     </div>
   );
