@@ -16,7 +16,7 @@ function App() {
       {/* <CountriesList />
       <CountriesList countries={countriesData} /> */}
       <Routes>
-        <Route path='/countries' element={<CountriesList countries={countriesData}/>} />
+        <Route path='/' element={<CountriesList countries={countriesData}/>} />
       </Routes>
     </div>
   );

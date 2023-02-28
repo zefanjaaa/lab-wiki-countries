@@ -7,7 +7,7 @@ function CountriesList(props) {
     useEffect(() => {
         setCountries(props.countries)
     }, [props.countries]);
-
+console.log(countries)
     return (
         <div>
             <h1>List of countries</h1>
