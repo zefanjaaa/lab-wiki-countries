@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 
 function CountryDetails(props) {
     const [foundCountry, setFoundCountry] = useState(null)
+    const [complicated, setComplicated ] = useState(countryData)
 
     const { countryId } = useParams()
     
@@ -16,7 +17,12 @@ function CountryDetails(props) {
             setFoundCountry(country)
         }
     }, [countryId])
-
+    {
+        complicated.map(value => {
+            return( value.border.includes(value.alpha3Code))
+        })
+        
+}}
     return (
         <div>
             <h1> Country Details</h1>
@@ -25,7 +31,9 @@ function CountryDetails(props) {
                 <>
                     <h2>{foundCountry.name.common}</h2>
                     <p>Capital:{foundCountry.capital}</p>
+                    
                     <p>Borders:{foundCountry.borders}</p>
+                    
                     <p>Area:{foundCountry.area}</p>
                     <Link to='/'>GO BACK</Link>
                 </>
