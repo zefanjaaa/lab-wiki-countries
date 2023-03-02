@@ -1,23 +1,48 @@
 import countryData from './../countries.json';
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function CountryDetails(land) {
+function CountryDetails() {
   const [foundCountry, setFoundCountry] = useState(null);
-  const [complicated, setComplicated] = useState(countryData);
+   
+    const [countries, setCountries] = useState([])
+    const [fetching, setFetching] = useState(true)
+    const { countryId } = useParams();
+  
+    //initial render
+    useEffect(() => {
+      axios.get(`https://ih-countries-api.herokuapp.com/countries/${countryId}`)
+        .then((response) => {
+          setCountries(response.data)
+          setFetching(false)
+      })
+    },[countryId])
 
-  const { countryId } = useParams();
 
+
+    
+    
   useEffect(() => {
-    const country = countryData.find((oneCountry) => {
-      return oneCountry.alpha3Code === countryId;
-    });
+    const country2 = countries.find((twocountry) => {
+    return twocountry.alpha3Code === countryId
+    })
+      if (country2) {
+          setFoundCountry(country2)
+      }
+  }, [countryId,countries])
+    
+    
+//   useEffect(() => {
+//     const country = countryData.find((oneCountry) => {
+//       return oneCountry.alpha3Code === countryId;
+//     });
 
-    if (country) {
-      setFoundCountry(country);
-    }
-  }, [countryId]);
-console.log(countryId)
+//     if (country) {
+//       setFoundCountry(country);
+//     }
+//   }, [countryId]);
+// console.log(countryId)
 
   return (
     <div>
@@ -36,13 +61,20 @@ console.log(countryId)
           {/* <p>Borders:{foundCountry.borders}</p> */}
 
          
-                  <p>Border</p>
+                  {/* <p>Border</p>
                   {foundCountry.borders.map((yy, xx) => {
                    
                       const link = `/countries/${yy}`
                       return <li key={xx}><Link to={link}> {yy}  </Link></li> 
-                  })}
-
+                  })} */}
+                  <p>Country with API</p>
+                  {countries.map((value) => (
+                      <div key={value.alpha3Code}>
+                          <h3>{value.name.common}</h3>
+                          <p>Capital: {value.capital}</p>
+                          <p>Area: {value.area}</p>
+                      </div>
+                  ))}
           <Link to="/">GO BACK</Link>
         </>
       )}
