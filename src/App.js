@@ -6,12 +6,22 @@ import CountriesList from './components/CountriesList';
 import { Routes, Route } from 'react-router-dom';
 import CountryDetails from './components/CountryDetails';
 import ErrorPage from './components/ErrorPage';
+import { useEffect, useState } from 'react';
 
 function App() {
 
-  const apiURL= 'https://ih-countries-api.herokuapp.com/countries'
+  // const apiURL= 'https://ih-countries-api.herokuapp.com/countries'
 
-  
+  const [countries, setCountries] = useState([])
+  const [fetching, setFetching] = useState(true)
+
+  useEffect(() => {
+    axios.get('https://ih-countries-api.herokuapp.com/countries')
+      .then((response) => {
+        setCountries(response.data)
+        setFetching(false)
+    })
+  },[])
   return (
     <div className="App">
      
