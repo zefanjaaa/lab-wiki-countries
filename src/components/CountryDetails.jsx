@@ -17,7 +17,7 @@ function CountryDetails(land) {
       setFoundCountry(country);
     }
   }, [countryId]);
-
+console.log(countryId)
 
   return (
     <div>
